@@ -21,7 +21,7 @@ Beyond tech, I’m also passionate about digital arts, 3D modeling, and video ed
 ---
 
 <div style="text-align:center; margin: 30px 0;">
-  <a href="../posts/hello-world/" style="
+  <a href="../posts/my-resume/" style="
     display: inline-block;
     padding: 14px 28px;
     background: linear-gradient(90deg, #4b006e 0%, #2d0036 100%);
