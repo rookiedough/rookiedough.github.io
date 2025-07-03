@@ -14,32 +14,32 @@ timezone:
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy # the main title
+title: Andrea Tancio # the main title
 
-tagline: A text-focused Jekyll theme # it will display as the subtitle
+tagline: Mini Archives # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  A minimal, responsive and feature-rich Jekyll theme for technical writing.
+  This is where I keep my projects, experiments, and other things.
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
-url: ""
+url: "https://rookiedough.github.io/"
 
 github:
-  username: github_username # change to your GitHub username
+  username: rookiedough # change to your GitHub username
 
-twitter:
-  username: twitter_username # change to your Twitter username
+# twitter:
+  # username: twitter_username # change to your Twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
-  email: example@domain.com # change to your email address
+  name: Andrea Kimberly Tancio
+  email: aktancio@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your Twitter homepage
-    - https://github.com/username # change to your GitHub homepage
+    # - https://twitter.com/username # change to your Twitter homepage
+    - https://github.com/rookiedough # change to your GitHub homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
@@ -98,7 +98,7 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: https://media.licdn.com/dms/image/v2/D4E03AQFKhs8erb3qxA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718220477526?e=1753920000&v=beta&t=yzYM4fWrVBC3peOqMNDi_I1nm6YeMHKC3kUCMp9Q4m4
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
@@ -213,7 +213,7 @@ exclude:
   - README.md
   - LICENSE
   - purgecss.js
-  - "*.config.js"
+  - rollup.config.js
   - "package*.json"
 
 jekyll-archives:
