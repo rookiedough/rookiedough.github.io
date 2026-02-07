@@ -1,0 +1,40 @@
+name: Auto-update Content List
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'content/**'
+
+jobs:
+  update-content-list:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Run update script
+        run: node update-content-list.js
+      
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code content-loader.js || echo "changed=true" >> $GITHUB_OUTPUT
+      
+      - name: Commit and push if changed
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add content-loader.js
+          git commit -m "Auto-update content list [skip ci]"
+          git push
