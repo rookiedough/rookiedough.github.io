@@ -2,11 +2,6 @@
 
 // List of content files (add new markdown files here)
 const contentFiles = [
-    'azure-openai-chatbot.md',
-    'data-cleaning-python.md',
-    'school-event-entrance.md',
-    'dashboard-ui-concept.md',
-    'workshop-video.md',
     'markdown-html-example.md'
 ];
 
