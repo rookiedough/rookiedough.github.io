@@ -2,6 +2,7 @@
 
 // List of content files (add new markdown files here)
 const contentFiles = [
+    'iot-research-paper.md',
     'markdown-html-example.md'
 ];
 
