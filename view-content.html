@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content - rookiedough</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="content-styles.css">
+    <!-- Marked.js for markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">🍪 <span class="logo-text">rookiedough</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#certifications">Certifications</a></li>
+                <li><a href="gallery.html">Content</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content Article -->
+    <article class="content-article">
+        <div class="container">
+            <a href="gallery.html" class="back-link">← Back to Content</a>
+            
+            <div id="loading" class="loading">Loading content... ⏳</div>
+            
+            <div id="content-container" style="display: none;">
+                <div class="article-meta" id="article-meta"></div>
+                <div class="article-body" id="article-body"></div>
+            </div>
+            
+            <div id="error-message" class="error-message" style="display: none;">
+                <h2>Content Not Found</h2>
+                <p>The requested content could not be loaded.</p>
+                <a href="gallery.html" class="btn btn-primary">Back to Content</a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 rookiedough. Made with 💖 and ☕</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Get filename from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const filename = urlParams.get('file');
+
+        if (!filename) {
+            showError();
+        } else {
+            loadContent(filename);
+        }
+
+        // Parse markdown frontmatter
+        function parseFrontmatter(markdown) {
+            const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+            const match = markdown.match(frontmatterRegex);
+            
+            if (!match) {
+                return { metadata: {}, content: markdown };
+            }
+            
+            const frontmatterText = match[1];
+            const contentText = match[2];
+            
+            const metadata = {};
+            frontmatterText.split('\n').forEach(line => {
+                const [key, ...valueParts] = line.split(':');
+                if (key && valueParts.length) {
+                    const value = valueParts.join(':').trim();
+                    metadata[key.trim()] = value;
+                }
+            });
+            
+            return { metadata, content: contentText };
+        }
+
+        // Load and display content
+        async function loadContent(filename) {
+            try {
+                const response = await fetch(`content/${filename}`);
+                if (!response.ok) throw new Error('Content not found');
+                
+                const markdown = await response.text();
+                const { metadata, content } = parseFrontmatter(markdown);
+                
+                // Update page title
+                document.title = `${metadata.title || 'Content'} - Andrea Tancio`;
+                
+                // Display metadata
+                const metaContainer = document.getElementById('article-meta');
+                metaContainer.innerHTML = `
+                    <div class="content-meta">
+                        ${metadata.category ? `<span class="content-category">${metadata.category}</span>` : ''}
+                        ${metadata.date ? `<span>📅 ${metadata.date}</span>` : ''}
+                        ${metadata.readTime ? `<span>⏱️ ${metadata.readTime}</span>` : ''}
+                        ${metadata.type ? `<span>🔖 ${metadata.type}</span>` : ''}
+                    </div>
+                    ${metadata.tags ? `
+                        <div class="content-tags" style="margin-top: 15px;">
+                            ${metadata.tags.split(',').map(tag => 
+                                `<span class="tag">${tag.trim()}</span>`
+                            ).join('')}
+                        </div>
+                    ` : ''}
+                `;
+                
+                // Render markdown to HTML (marked.js supports HTML in markdown by default)
+                const htmlContent = marked.parse(content);
+                document.getElementById('article-body').innerHTML = htmlContent;
+                
+                // Show content
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content-container').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading content:', error);
+                showError();
+            }
+        }
+
+        function showError() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error-message').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

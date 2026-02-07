@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content - rookiedough</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="content-styles.css">
+    <!-- Marked.js for markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">🍪 <span class="logo-text">rookiedough</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#certifications">Certifications</a></li>
+                <li><a href="gallery.html" class="active">Content</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="fade-in">Blog & Creative Works</h1>
+            <p class="subtitle fade-in-delay">Thoughts, tutorials, and creative projects</p>
+        </div>
+    </section>
+
+    <!-- Search and Filter -->
+    <section class="content-controls">
+        <div class="container">
+            <div class="search-filter-bar">
+                <div class="search-box">
+                    <input type="text" id="content-search" placeholder="Search content...">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div class="filter-categories">
+                    <button class="category-filter active" data-category="all">All</button>
+                    <button class="category-filter" data-category="Blog">Blog</button>
+                    <button class="category-filter" data-category="Gallery">Gallery</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Grid -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-grid" id="content-grid">
+                <!-- Content cards will be dynamically loaded here -->
+                <div class="loading">Loading content... ⏳</div>
+            </div>
+            <div id="no-results" class="no-results" style="display: none;">
+                <p>No content found matching your search.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 rookiedough. Made with 💖 and ☕</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="content-loader.js"></script>
+</body>
+</html>
