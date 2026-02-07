@@ -37,14 +37,22 @@ async function loadContent() {
     const contentGrid = document.getElementById('content-grid');
     contentGrid.innerHTML = '<div class="loading">Loading content... ⏳</div>';
     
+    console.log('Starting to load content files:', contentFiles);
+    
     try {
         const promises = contentFiles.map(async (filename) => {
             try {
+                console.log(`Fetching: content/${filename}`);
                 const response = await fetch(`content/${filename}`);
-                if (!response.ok) throw new Error(`Failed to load ${filename}`);
+                console.log(`Response for ${filename}:`, response.status, response.ok);
+                
+                if (!response.ok) throw new Error(`Failed to load ${filename} - Status: ${response.status}`);
                 
                 const markdown = await response.text();
+                console.log(`Loaded ${filename}, length:`, markdown.length);
+                
                 const { metadata, content } = parseFrontmatter(markdown);
+                console.log(`Parsed metadata for ${filename}:`, metadata);
                 
                 // Extract first paragraph as excerpt
                 const lines = content.trim().split('\n');
@@ -69,13 +77,18 @@ async function loadContent() {
         });
         
         const results = await Promise.all(promises);
+        console.log('All results:', results);
+        
         allContent = results.filter(item => item !== null);
+        console.log('Filtered content:', allContent);
+        
         filteredContent = [...allContent];
         
         displayContent(filteredContent);
+        console.log('Content displayed');
     } catch (error) {
         console.error('Error loading content:', error);
-        contentGrid.innerHTML = '<div class="loading">Error loading content. Please refresh the page.</div>';
+        contentGrid.innerHTML = `<div class="loading">Error loading content: ${error.message}. Please check the console.</div>`;
     }
 }
 
