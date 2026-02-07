@@ -2,7 +2,9 @@
 
 // List of content files (add new markdown files here)
 const contentFiles = [
-    'markdown-html-example.md'
+    'markdown-html-example copy check.md',
+    'markdown-html-example.md',
+    'test-automation.md'
 ];
 
 let allContent = [];
