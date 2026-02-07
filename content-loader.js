@@ -2,6 +2,7 @@
 
 // List of content files (add new markdown files here)
 const contentFiles = [
+    'markdown-html-example copy.md',
     'markdown-html-example.md'
 ];
 
