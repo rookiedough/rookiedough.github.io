@@ -28,16 +28,20 @@ jobs:
       - name: Run update script
         run: node update-content-list.js
       
+      - name: Update cache version in gallery.html
+        run: |
+          sed -i -E 's/content-loader\.js\?v=([0-9]+)/content-loader.js?v='$(($(grep -oP 'content-loader\.js\?v=\K[0-9]+' gallery.html) + 1))'/g' gallery.html
+      
       - name: Check for changes
         id: git-check
         run: |
-          git diff --exit-code content-loader.js || echo "changed=true" >> $GITHUB_OUTPUT
+          git diff --exit-code content-loader.js gallery.html || echo "changed=true" >> $GITHUB_OUTPUT
       
       - name: Commit and push if changed
         if: steps.git-check.outputs.changed == 'true'
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add content-loader.js
+          git add content-loader.js gallery.html
           git commit -m "Auto-update content list [skip ci]"
           git push origin main
