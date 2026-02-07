@@ -212,14 +212,33 @@ Back to regular markdown!
 ```
 portfolio/
 ├── content/
-│   ├── azure-openai-chatbot.md
-│   ├── data-cleaning-python.md
-│   ├── school-event-entrance.md
-│   ├── dashboard-ui-concept.md
-│   └── your-new-file.md  ← Add files here
-├── gallery.html          ← Displays all content
-├── content-loader.js     ← Register new files here
-└── content-styles.css    ← Styling
+│   ├── markdown-html-example.md  ← Your content files here
+│   └── your-new-file.md
+├── gallery.html                  ← Content gallery page
+├── view-content.html             ← Individual content viewer
+├── content-loader.js             ← Auto-updated by script
+├── update-content-list.js        ← Run this to update content list
+├── content-styles.css            ← Content styling
+└── CONTENT_GUIDE.md              ← This file
 ```
+
+## Troubleshooting
+
+### Content not showing up?
+
+1. **Check the file exists** in `content/` folder
+2. **Run the update script**: `node update-content-list.js`
+3. **Bump cache version** in `gallery.html` (increment the ?v= number)
+4. **Commit and push** to GitHub
+5. **Wait 2-3 minutes** for GitHub Pages to rebuild
+6. **Hard refresh** with `Ctrl + Shift + R`
+
+### Still seeing old content?
+
+- Try opening in an **incognito/private window**
+- Clear browser cache completely
+- Check if the version number in `gallery.html` was actually incremented
+
+---
 
 Happy content creating! ✨
